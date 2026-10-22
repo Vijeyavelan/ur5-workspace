@@ -53,6 +53,7 @@ candidates at 224 px. `render.py` = images/GIF/top-down drawing. `view.py` = int
 * Closed-form IK recovers 20k random configs exactly; |det J| factorization matches numeric Jacobian (1e-16).
 * MuJoCo `tool0` site matches the DH FK to 1e-15 m (link frames transcribed from ros-industrial ur_description).
 * Door handle site vs `tasks.door_chains` geometry: exact match at every angle.
+* Runs on Vijey's Mac (Python 3.11, `requirements.txt` pins): self-test, dry-run and `mjpython view.py` viewer.
 * Every chosen layout keeps ≥ 22 mm between robot and printer/table/door along all chosen motions
   (fingers vs the object they hold excluded).
 
@@ -94,4 +95,3 @@ Straight-down picks through the door don't fit (wrist ~0.28 m above the fingerti
 3. Add the drop-off bin to the scene and tasks; it must be inside the third-person frame.
 4. Motions are checked at waypoints only (1.5–8 cm apart); add interpolated checks or a planner before
    running on hardware. Parts and contact forces are not modeled.
-5. Not yet run on Vijey's Mac (`mjpython view.py`).
