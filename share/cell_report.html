@@ -1,0 +1,872 @@
+<title>UR5 + X1E Cell Layout</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@87,500;87,650;87,750&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column (~68ch) on a cool drafting-paper ground; figures and drawings
+   break out to a wider measure. One loud element: the hazard-striped "don't mount yet" band. */
+:root {
+  --paper: #f3f5f7;
+  --surface: #ffffff;
+  --ink: #18212c;
+  --muted: #566273;
+  --rule: #d3d9e0;
+  --accent: #0d6a8a;
+  --accent-soft: #e1eff4;
+  --arm: #d9822b;
+  --door: #4f86c6;
+  --table: #efe6d6;
+  --printer: #3a4049;
+  --plate: #c9a46a;
+  --cam: #2f8a57;
+  --old: #9aa3ae;
+  --hazard: #f2c230;
+  --hazard-ink: #1d1f22;
+  --caution-bg: #fff6dd;
+  --caution-ink: #5e4100;
+  --ok: #2f7d4f;
+  --bad: #b5452f;
+  --field: #ffffff;
+  --display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --body: "Source Sans 3", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --measure: 68ch;
+  --wide: 1080px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #11161c; --surface: #19202a; --ink: #e5e9ee; --muted: #9ba6b4; --rule: #2c3643;
+    --accent: #5db8d8; --accent-soft: #15303b; --arm: #e9964d; --door: #78a8e0; --table: #3a3428;
+    --printer: #5b6370; --plate: #b8935a; --cam: #5cc489; --old: #6b7480; --hazard: #e6b622;
+    --hazard-ink: #15171a; --caution-bg: #2e2510; --caution-ink: #f4d58c; --ok: #5cc489; --bad: #ec7f68;
+    --field: #121820; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #11161c; --surface: #19202a; --ink: #e5e9ee; --muted: #9ba6b4; --rule: #2c3643;
+  --accent: #5db8d8; --accent-soft: #15303b; --arm: #e9964d; --door: #78a8e0; --table: #3a3428;
+  --printer: #5b6370; --plate: #b8935a; --cam: #5cc489; --old: #6b7480; --hazard: #e6b622;
+  --hazard-ink: #15171a; --caution-bg: #2e2510; --caution-ink: #f4d58c; --ok: #5cc489; --bad: #ec7f68;
+  --field: #121820; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 40px 72px;
+}
+.page { max-width: var(--wide); margin: 0 auto; display: grid; gap: 56px; }
+.col { max-width: var(--measure); }
+section { display: grid; gap: 18px; scroll-margin-top: 16px; }
+section > * { min-width: 0; }
+
+h1, h2, h3 { font-family: var(--display); font-stretch: 87%; text-wrap: balance; margin: 0; line-height: 1.12; }
+h1 { font-size: clamp(2.1rem, 5vw, 3.1rem); font-weight: 750; letter-spacing: -0.01em; }
+h2 { font-size: clamp(1.45rem, 3vw, 1.85rem); font-weight: 650; }
+h3 { font-size: 1.18rem; font-weight: 650; }
+p { margin: 0; }
+p + p { margin-top: 0.7em; }
+ul, ol { margin: 0; padding-left: 1.3em; display: grid; gap: 6px; }
+a { color: var(--accent); text-underline-offset: 2px; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 2px;
+}
+strong { font-weight: 600; }
+code, .mono { font-family: var(--mono); font-size: 0.86em; }
+.eyebrow {
+  font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+}
+.sec-head { display: grid; gap: 6px; border-top: 1px solid var(--rule); padding-top: 20px; }
+.muted { color: var(--muted); }
+.small { font-size: 0.92rem; }
+
+/* header */
+header.top { display: grid; gap: 14px; }
+header.top .lede { font-size: 1.16rem; max-width: 60ch; }
+.specline { display: flex; flex-wrap: wrap; gap: 6px 18px; font-family: var(--mono); font-size: 0.8rem; color: var(--muted); }
+
+/* Vijey's note slot */
+#vnote-sec { display: grid; gap: 10px; padding: 18px 20px; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; }
+#vnote-text { white-space: pre-wrap; max-width: var(--measure); }
+#vnote-edit { display: grid; gap: 8px; }
+#vnote-edit textarea { min-height: 110px; }
+
+/* caution band */
+.caution { background: var(--caution-bg); color: var(--caution-ink); border-radius: 4px; overflow: hidden; display: grid; }
+.caution::before {
+  content: ""; height: 14px;
+  background: repeating-linear-gradient(-45deg, var(--hazard) 0 14px, var(--hazard-ink) 14px 28px);
+}
+.caution .inner { padding: 22px 24px 24px; display: grid; gap: 14px; }
+.caution h2 { color: var(--caution-ink); font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 750; }
+.caution .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px 32px; }
+.caution .cols > * { min-width: 0; }
+.caution ol { padding-left: 1.4em; }
+.btn {
+  appearance: none; border: 1px solid var(--accent); background: var(--accent); color: var(--surface);
+  font: 600 0.95rem var(--body); padding: 9px 16px; border-radius: 4px; cursor: pointer; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px; justify-self: start;
+}
+.btn.ghost { background: transparent; color: var(--accent); }
+.btn:disabled { opacity: 0.5; cursor: default; }
+.caution .btn { background: var(--caution-ink); border-color: var(--caution-ink); color: var(--caution-bg); }
+
+/* contents */
+nav.toc { display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: 0.95rem; }
+nav.toc a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--rule); }
+nav.toc a:hover { border-color: var(--accent); color: var(--accent); }
+
+/* definition lists */
+dl.kv { display: grid; grid-template-columns: max-content 1fr; gap: 6px 18px; margin: 0; }
+dl.kv dt { color: var(--muted); }
+dl.kv dd { margin: 0; font-variant-numeric: tabular-nums; }
+
+/* findings */
+.findings { counter-reset: f; display: grid; gap: 22px; list-style: none; padding: 0; }
+.findings > li { display: grid; grid-template-columns: 2.2rem 1fr; gap: 4px 12px; counter-increment: f; }
+.findings > li::before {
+  content: counter(f); font-family: var(--display); font-weight: 750; font-size: 1.5rem; color: var(--accent); line-height: 1.2;
+}
+.findings > li > div { display: grid; gap: 6px; min-width: 0; }
+
+.aside { border-left: 3px solid var(--rule); padding: 2px 0 2px 16px; color: var(--ink); }
+.aside h3 { font-size: 1.02rem; margin-bottom: 4px; }
+
+/* layouts */
+.layouts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr)); gap: 28px; }
+.layout { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 20px; display: grid; gap: 16px; align-content: start; }
+.layout > * { min-width: 0; }
+.layout header { display: grid; gap: 4px; }
+.tag { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.drawing svg { width: 100%; height: auto; display: block; }
+.drawing .t { font-family: var(--body); fill: var(--ink); }
+figure { margin: 0; display: grid; gap: 8px; }
+figure img { width: 100%; height: auto; display: block; border-radius: 4px; border: 1px solid var(--rule); background: #9aa4b2; }
+figcaption { font-size: 0.9rem; color: var(--muted); }
+.figrow { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 16px; }
+
+/* plate map */
+.platemap { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: center; }
+.platemap svg { width: 132px; height: auto; display: block; }
+.platemap .pm-cell { stroke: var(--surface); stroke-width: 2; }
+
+/* tables */
+.tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 6px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 0.93rem; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--rule); vertical-align: top; white-space: nowrap; }
+th { font-weight: 600; color: var(--muted); font-size: 0.82rem; background: var(--paper); }
+tr:last-child td { border-bottom: 0; }
+td.wrap { white-space: normal; min-width: 14ch; }
+tr.lead td:first-child { font-weight: 600; }
+tr.faded td { color: var(--muted); }
+tr.struck td { color: var(--muted); }
+.yes { color: var(--ok); font-weight: 600; }
+
+details { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; }
+details > summary { cursor: pointer; padding: 12px 16px; font-weight: 600; }
+details > .body { padding: 0 16px 16px; display: grid; gap: 14px; }
+
+/* build list */
+.build { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 0 32px; }
+.build li { padding: 12px 0; border-top: 1px solid var(--rule); display: grid; gap: 2px; }
+.build .who { font-family: var(--mono); font-size: 0.74rem; color: var(--muted); }
+
+/* steps */
+.steps { padding-left: 1.5em; gap: 10px; }
+
+/* form */
+.form { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 22px; display: grid; gap: 26px; }
+.form-status { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; font-size: 0.95rem; }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--old); display: inline-block; margin-right: 6px; vertical-align: 1px; }
+.dot.ok { background: var(--ok); }
+.dot.bad { background: var(--bad); }
+.progress { font-family: var(--mono); font-size: 0.82rem; color: var(--muted); }
+fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: 12px; min-width: 0; }
+legend { font-family: var(--display); font-stretch: 87%; font-weight: 650; font-size: 1.12rem; padding: 0; margin-bottom: 4px; }
+.fgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 14px 22px; }
+.f { display: grid; gap: 4px; align-content: start; }
+.f label { font-weight: 600; font-size: 0.95rem; line-height: 1.3; }
+.f .help { font-size: 0.85rem; color: var(--muted); line-height: 1.4; }
+.f .meta { display: flex; justify-content: space-between; gap: 8px; font-family: var(--mono); font-size: 0.72rem; color: var(--muted); }
+.inwrap { display: flex; align-items: stretch; border: 1px solid var(--rule); border-radius: 4px; background: var(--field); }
+.inwrap:focus-within { border-color: var(--accent); }
+.inwrap input, .inwrap select { flex: 1; min-width: 0; border: 0; background: transparent; color: var(--ink); font: 1rem var(--body); padding: 8px 10px; outline: none; }
+.inwrap .unit { padding: 8px 10px; color: var(--muted); font-family: var(--mono); font-size: 0.82rem; display: flex; align-items: center; border-left: 1px solid var(--rule); }
+.f.filled .inwrap { border-color: var(--ok); }
+textarea { width: 100%; border: 1px solid var(--rule); border-radius: 4px; background: var(--field); color: var(--ink); font: 1rem var(--body); padding: 10px; min-height: 90px; resize: vertical; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+#save-msg, #copy-msg { font-size: 0.92rem; }
+
+footer { font-size: 0.9rem; color: var(--muted); display: grid; gap: 10px; }
+footer ul { gap: 4px; }
+
+@media (max-width: 560px) {
+  body { font-size: 16px; padding-block: 24px 56px; }
+  .page { gap: 44px; }
+  .layout, .form { padding: 16px; }
+  .caution .inner { padding: 18px 16px 20px; }
+  dl.kv { grid-template-columns: 1fr; gap: 0; }
+  dl.kv dd { margin-bottom: 8px; }
+  .platemap { grid-template-columns: 1fr; }
+}
+</style>
+
+<div class="page">
+
+<header class="top">
+  <div class="eyebrow">Placement study · simulated in MuJoCo · estimated printer geometry</div>
+  <h1>UR5 + X1E cell layout</h1>
+  <p class="lede">Where to put the UR5 and the third-person camera next to the Bambu Lab X1E, why, what is still an estimate, and what to measure and decide before anything is mounted.</p>
+  <div class="specline"><span>UR5 CB3</span><span>Robotiq 2F-85</span><span>wrist RealSense</span><span>Bambu Lab X1E + AMS</span><span>3 ft × 6 ft table</span></div>
+</header>
+
+<section id="vnote-sec" hidden aria-label="Note from Vijey">
+  <div class="eyebrow">Note from Vijey</div>
+  <div id="vnote-text"></div>
+  <div id="vnote-edit" hidden>
+    <label for="vnote-input" class="small muted">Only you (the page owner) see this box. Whatever you save shows above for everyone who opens the page. Leave it empty to hide the note.</label>
+    <textarea id="vnote-input" placeholder="Write a note to your friend here"></textarea>
+    <div class="actions">
+      <button class="btn" id="vnote-save" type="button">Save note</button>
+      <span id="vnote-msg" class="small muted"></span>
+    </div>
+  </div>
+</section>
+
+<section class="caution" aria-labelledby="h-nomount">
+  <div class="inner">
+    <h2 id="h-nomount">Don't drill, bolt or mount anything yet</h2>
+    <div class="cols">
+      <div>
+        <p>Every position on this page comes from <strong>estimated</strong> printer-interior dimensions. The X1E's outer size (389 × 389 × 457 mm), the AMS height (+224 mm) and the 256 mm build volume are published specs and used as-is. These are guesses:</p>
+        <ul style="margin-top:10px">
+          <li>door opening size and sill height</li>
+          <li>which side the door hinges on (assumed left)</li>
+          <li>where the build plate sits, and its height with the bed fully up</li>
+          <li>where the toolhead and gantry park after a print</li>
+          <li>the AMS footprint</li>
+          <li>the wrist camera mount offsets</li>
+        </ul>
+      </div>
+      <div style="display:grid;gap:14px;align-content:start">
+        <p><strong>What happens next</strong></p>
+        <ol>
+          <li>You measure the printer and enter the numbers in the form at the bottom of this page.</li>
+          <li>Vijey re-runs the study with your numbers.</li>
+          <li>The positions get fixed. Then mount things.</li>
+        </ol>
+        <a class="btn" href="#measure">Go to the measurement form</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<nav class="toc" aria-label="Contents">
+  <a href="#cell">The cell</a>
+  <a href="#frame">How positions are measured</a>
+  <a href="#findings">What the study found</a>
+  <a href="#layouts">Layouts</a>
+  <a href="#camera">Third-person camera</a>
+  <a href="#build">Things to make or buy</a>
+  <a href="#limits">Limits</a>
+  <a href="#todo">Your next steps</a>
+  <a href="#measure">Measurement form</a>
+</nav>
+
+<section id="cell" class="col">
+  <div class="sec-head"><div class="eyebrow">Setup</div><h2>The cell, as you described it</h2></div>
+  <ul>
+    <li>UR5 <strong>CB3</strong> (not e-Series) with a Robotiq <strong>2F-85</strong> and a wrist RealSense on a 3D-printed mount.</li>
+    <li>Two Intel RealSense cameras, model not known yet. D405, D435 and D455 have different fields of view.</li>
+    <li>Bambu Lab <strong>X1E with the AMS</strong> on top.</li>
+    <li>Everything on one <strong>3 ft × 6 ft table</strong>, with temporary cardboard sheets as a clean background for the cameras.</li>
+    <li>Goal: pick printed parts from the printer and record demonstrations (wrist camera + third-person camera) to train a VLA model.</li>
+  </ul>
+  <p class="muted">Still open on your side: pick parts in place or pull the plate out (you want to try both), part size (the study assumes generous clearance), the RealSense models, which VLA, and where picked parts go.</p>
+</section>
+
+<section id="frame" class="col">
+  <div class="sec-head"><div class="eyebrow">Reference</div><h2>How positions are measured</h2></div>
+  <p>Every position is measured from the <strong>bottom-front-center of the printer</strong>: where its front face meets the surface it stands on, at the middle of its width.</p>
+  <dl class="kv">
+    <dt>x</dt><dd>left (−) or right (+) of the printer's center, looking at the door</dd>
+    <dt>distance</dt><dd>straight out in front of the printer's front face</dd>
+    <dt>heights</dt><dd>above the table top</dd>
+    <dt>stand / riser</dt><dd>"printer on a 200 mm stand" means the printer's base sits 200 mm above the table while the arm base stays on the table</dd>
+    <dt>bed Z</dt><dd>where the bed parks after the print, in printer Z (mm); set by the printer's end G-code</dd>
+  </dl>
+  <p>The layout drawings below use this frame, with the arm's base position dimensioned. Base rotation doesn't matter for reach (every UR5 joint turns ±360°); point the base cable away from the printer.</p>
+</section>
+
+<section id="findings">
+  <div class="sec-head col"><div class="eyebrow">Results</div><h2>What the study found</h2></div>
+  <ol class="findings col">
+    <li><div>
+      <h3>Straight-down picks through the door don't fit</h3>
+      <p>With the gripper vertical, the wrist sits about 0.28 m above the fingertips. The opening's top bar is about 390 mm above the printer's base and its sill about 45 mm (both estimates), and the AMS blocks the lid. Picks only work with the gripper <strong>tilted steeply into the printer</strong>, fingers closing left-right, over the <strong>middle three columns</strong> of the plate. In both pick layouts every reachable point needs a 70° tilt from vertical. The back of the plate, under the parked toolhead, is out of reach.</p>
+      <p class="muted small">Steep grasps grip 4 cm above the plate, so they assume parts at least about 5 cm tall.</p>
+    </div></li>
+    <li><div>
+      <h3>Pulling the plate out is the robust option</h3>
+      <p>The arm swings the door 0→90° and slides the plate a full 32 cm out, all in one arm configuration. Moving the base 2.5 cm in any direction barely changes the result (worst score 0.985 out of 1).</p>
+    </div></li>
+    <li><div>
+      <h3>Top access doesn't help</h3>
+      <p>With the lid off and the AMS beside the printer, the gantry, toolhead and frame still block most of the opening: 16 % of plate points reachable.</p>
+    </div></li>
+    <li><div>
+      <h3>Bed park height matters</h3>
+      <p>Bed Z 100–200 works. At Z 250 the plate tab sits too close to the door sill for the lower finger. For the pull layout the score drops from 1.0 at Z 100 to 0.61 at Z 250. The end G-code sets this.</p>
+    </div></li>
+  </ol>
+  <div class="aside col">
+    <h3>Why every task uses one arm configuration</h3>
+    <p>A UR5 can reach most poses with its wrist or elbow flipped either way. If some demonstrations flip partway through and others don't, the VLA gets inconsistent motions to learn from. So the study rejects any motion that needs a flip, even when a flip would reach more of the plate.</p>
+  </div>
+</section>
+
+<section id="layouts">
+  <div class="sec-head col"><div class="eyebrow">Placement</div><h2>Layouts</h2>
+    <p>All four keep at least 2 cm between the robot and the printer, door and table along every motion checked. Two are worth considering; the other two get one line each below the table.</p></div>
+
+  <div class="layouts">
+    <article class="layout" aria-labelledby="h-pull">
+      <header><span class="tag">Most robust</span><h3 id="h-pull">Pull the plate out</h3></header>
+      <dl class="kv">
+        <dt>Arm base</dt><dd>x −350 mm (hinge side), 850 mm in front</dd>
+        <dt>Heights</dt><dd>printer and arm both directly on the table</dd>
+        <dt>Bed Z</dt><dd>100</dd>
+        <dt>Door</dt><dd>0→90°</dd>
+        <dt>Plate pull</dt><dd>full 32 cm</dd>
+        <dt>Picks in place</dt><dd>none</dd>
+        <dt>Min clearance</dt><dd>22 mm</dd>
+        <dt>Score at ±2.5 cm</dt><dd>0.985</dd>
+      </dl>
+      <div class="drawing" id="draw-pull" role="img" aria-label="Top view of the pull layout: printer at the far end of the table, arm base 350 mm left of center and 850 mm in front."></div>
+      <p class="small muted">Third-person camera: not drawn. The camera comparison below was run for the pick + pull layout only; this layout's camera spot hasn't been chosen.</p>
+      <figure>
+        <img src="figures/pull_motion.gif" width="640" height="420" loading="lazy" alt="Animation of the arm opening the door and sliding the build plate out.">
+        <figcaption>Door swing and plate pull, simulated.</figcaption>
+      </figure>
+      <figure>
+        <img src="figures/pull_overview.png" width="960" height="640" loading="lazy" alt="3D view of the pull layout on the table.">
+        <figcaption>3D view.</figcaption>
+      </figure>
+    </article>
+
+    <article class="layout" aria-labelledby="h-both">
+      <header><span class="tag">Does both tasks</span><h3 id="h-both">Pick + pull</h3></header>
+      <dl class="kv">
+        <dt>Arm base</dt><dd>x +125 mm, 750 mm in front</dd>
+        <dt>Heights</dt><dd>printer on a 200 mm stand</dd>
+        <dt>Bed Z</dt><dd>200</dd>
+        <dt>Door</dt><dd>0→75° (see note below)</dd>
+        <dt>Plate pull</dt><dd>full 32 cm</dd>
+        <dt>Plate points</dt><dd>36 % (9 of 25)</dd>
+        <dt>Min clearance</dt><dd>26 mm</dd>
+        <dt>Score at ±2.5 cm</dt><dd>0.658</dd>
+      </dl>
+      <div class="drawing" id="draw-both" role="img" aria-label="Top view of the pick plus pull layout: arm base 125 mm right of center and 750 mm in front, with camera candidates E and F past the right table edge."></div>
+      <div class="platemap">
+        <svg id="pm-both" viewBox="0 0 132 176" aria-label="Plate map: front three rows, middle three columns reachable."></svg>
+        <p class="small">Plate seen from above, door at the bottom. Filled = reachable with a 70° tilt. The front three rows of the middle three columns work; the back two rows sit under the parked toolhead.</p>
+      </div>
+      <figure>
+        <img src="figures/both_motion.gif" width="640" height="420" loading="lazy" alt="Animation of the arm opening the door, picking from the plate and pulling the plate.">
+        <figcaption>Door, one pick and the plate pull, simulated.</figcaption>
+      </figure>
+      <figure>
+        <img src="figures/both_overview.png" width="960" height="640" loading="lazy" alt="3D view of the pick plus pull layout, printer on a stand.">
+        <figcaption>3D view, printer on the 200 mm stand.</figcaption>
+      </figure>
+    </article>
+  </div>
+
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Layout</th><th>Base x</th><th>Distance</th><th>Heights</th><th>Bed Z</th><th>Door</th><th>Plate points</th><th>Plate pull</th><th>Min clearance</th><th>Score at ±2.5 cm</th></tr></thead>
+      <tbody>
+        <tr class="lead"><td>Pull plate out</td><td>−350 mm</td><td>850 mm</td><td>both on the table</td><td>100</td><td>0→90°</td><td>–</td><td>full</td><td>22 mm</td><td>0.985</td></tr>
+        <tr class="lead"><td>Pick + pull</td><td>+125 mm</td><td>750 mm</td><td>printer on 200 mm stand</td><td>200</td><td>to 75°</td><td>36 %</td><td>full</td><td>26 mm</td><td>0.658</td></tr>
+        <tr class="faded"><td>Pick in place</td><td>+350 mm</td><td>600 mm</td><td>printer on 200 mm stand</td><td>200</td><td>to 75°</td><td>40 %</td><td>–</td><td>22 mm</td><td>0.467</td></tr>
+        <tr class="faded"><td>Top access (lid off)</td><td>−300 mm</td><td>200 mm</td><td>arm on 100 mm riser</td><td>50</td><td>–</td><td>16 %</td><td>–</td><td>22 mm</td><td>0.238</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col" style="display:grid;gap:10px">
+    <p><strong>Pick in place</strong> reaches slightly more of the plate (40 %) but can't pull the plate, and its score drops to 0.467 within 2.5 cm of the spot. <strong>Top access</strong> reaches 16 % of the plate with the lid off and isn't viable.</p>
+    <p class="small muted"><strong>Plate points</strong> come from a 5 × 5 grid of grasp points on estimated geometry. Use them to compare layouts, not as final coverage. <strong>Score</strong> combines pick coverage, door swing, plate pull and distance from arm singularities, each 0 to 1 with weights that are a judgment call; "at ±2.5 cm" is the worst score found when the base moves 2.5 cm in each direction, so the chosen spot tolerates placement error. <strong>Door to 75°</strong>: in the pick layouts, the arm configuration used for the task stops at 75°. A different configuration reaches 90° (a wrist flip outside the printer), or a magnet can hold the door open.</p>
+  </div>
+
+  <details>
+    <summary>How sensitive is the score to the base position?</summary>
+    <div class="body">
+      <p class="small">Score for each base position the search tried, at the height and bed Z of each layout. White cells have no stored result for that position. The chosen spot is the one whose worst score within ±2.5 cm is highest, not necessarily the brightest cell.</p>
+      <div class="figrow">
+        <figure><img src="figures/pull_heatmap.png" width="832" height="598" loading="lazy" alt="Heatmap of pull score by base position."><figcaption>Pull the plate out.</figcaption></figure>
+        <figure><img src="figures/both_heatmap.png" width="832" height="598" loading="lazy" alt="Heatmap of pick plus pull score by base position."><figcaption>Pick + pull.</figcaption></figure>
+      </div>
+    </div>
+  </details>
+</section>
+
+<section id="camera">
+  <div class="sec-head col"><div class="eyebrow">Data collection</div><h2>Third-person camera</h2></div>
+  <div class="col" style="display:grid;gap:14px">
+    <p class="aside"><strong>About the study's own drawings.</strong> The camera spot drawn in the code's top-view drawings (<code>*_table_layout.png</code>) and scene-camera renders (<code>*_scene_cam.png</code>), and stored in <code>layout.json</code>, comes from the first camera search. That is camera A below, which loses the elbow from view most of the time. It is not the recommendation. The drawings on this page leave it out.</p>
+    <h3>What each camera is for</h3>
+    <p>Most VLAs shrink each camera image to about 224 × 224 before the model sees it. At that size a 30 mm printed part is:</p>
+  </div>
+  <div class="tablewrap col">
+    <table>
+      <thead><tr><th>Camera</th><th>30 mm part at 224 px</th></tr></thead>
+      <tbody>
+        <tr><td>third-person, any placement tried</td><td>3–6 px</td></tr>
+        <tr><td>wrist camera, pre-grasp</td><td>23 px</td></tr>
+        <tr><td>wrist camera, at grasp</td><td>36 px</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="col">So the <strong>wrist camera carries the part detail</strong>, and the <strong>third-person camera carries the task state</strong>: door open or closed, plate in or out, where the arm is relative to the door frame, which step of the task it's on. Frame the third-person view around the arm and the opening, not the parts.</p>
+
+  <h3 class="col">Base in view, or elbow outward?</h3>
+  <p class="col">Six candidate spots, compared on the pick + pull layout. Positions are in the printer frame (x, y with negative y in front of the printer) and height above the table, in metres.</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th></th><th>Camera position</th><th>30 mm part</th><th>Gripper visible</th><th>Elbow in frame</th><th>Plate seen through door</th><th>Base in frame</th></tr></thead>
+      <tbody>
+        <tr class="struck"><td>A: first study pick (old)</td><td>0.30, −0.70, 1.05</td><td>4.3 px</td><td>99 %</td><td>35 %</td><td>96 %</td><td>no</td></tr>
+        <tr class="faded"><td>B: side-on</td><td>0.62, −0.30, 0.75</td><td>5.7 px</td><td>90 %</td><td>10 %</td><td>16 %</td><td>no</td></tr>
+        <tr class="faded"><td>C: high, looking down</td><td>0.42, −0.55, 1.14</td><td>4.3 px</td><td>100 %</td><td>3 %</td><td>68 %</td><td>no</td></tr>
+        <tr class="faded"><td>D: beyond the open door</td><td>−0.45, −1.05, 0.89</td><td>3.4 px</td><td>52 %</td><td>99 %</td><td>8 %</td><td>no</td></tr>
+        <tr class="lead"><td>E: whole cell</td><td>0.95, −1.15, 1.28</td><td>2.7 px</td><td>100 %</td><td>100 %</td><td>56 %</td><td class="yes">yes</td></tr>
+        <tr class="lead"><td>F: elbow outward</td><td>0.60, −0.80, 0.95</td><td>3.8 px</td><td>100 %</td><td>99 %</td><td>72 %</td><td>no</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="layouts">
+    <div class="col" style="display:grid;gap:8px;max-width:none">
+      <h3>E: whole cell, base in view</h3>
+      <p>Shows the full arm pose, which helps a model that gets no joint angles. OpenVLA, for example, takes one image and nothing else. It costs about 35 % of the pixels on the printer and plate.</p>
+    </div>
+    <div class="col" style="display:grid;gap:8px;max-width:none">
+      <h3>F: elbow outward</h3>
+      <p>Drops the base, which never moves and carries no information, and keeps everything that moves, including the forearm passing through the door, where clearance is tightest. Suits models that also take joint angles and the wrist image (π0-style). F is aimed 60 % at the door opening and 40 % at the elbow's average position.</p>
+    </div>
+  </div>
+  <p class="col">Which one fits depends on the VLA you train, so this page doesn't pick. Both sit past the edge of a 3 ft table: use a clamp arm or a floor tripod. From every outside viewpoint the arm hides about 30 % of the plate while it works inside, because the door is the only view into the chamber; the wrist camera covers that.</p>
+  <figure>
+    <img src="figures/camera_compare_both.png" width="1324" height="1570" loading="lazy" alt="Six camera candidates A to F, each shown at grasp, with the plate pulled out, and at 224 by 224 pixels, with their metrics.">
+    <figcaption>Each candidate at grasp, with the plate pulled out, and at the 224 × 224 a model sees. Row A is the old spot.</figcaption>
+  </figure>
+
+  <div class="col" style="display:grid;gap:12px">
+    <h3>Settle before mounting the camera</h3>
+    <ul>
+      <li><strong>The VLA model.</strong> Its input size, whether it takes joint angles, and how many cameras it uses decide between E and F.</li>
+      <li><strong>The drop-off bin.</strong> It's part of the task, so it must be in frame. Once the camera is fixed, so is the bin.</li>
+      <li><strong>Cropping.</strong> If the training pipeline center-crops to a square, the sides of a 16:9 frame are lost. Frame for the square, or record at 640 × 480.</li>
+      <li><strong>Fixed exposure and white balance.</strong> The dark chamber next to a bright table makes auto-exposure flicker between episodes.</li>
+      <li><strong>A rigid mount.</strong> A wobbly or folding table shakes a camera mounted on it; mount the camera off the table, or brace the table. Calibrate the camera pose (an AprilTag works), save a reference image, and compare against it at the start of every session.</li>
+    </ul>
+    <h3>While recording</h3>
+    <ul>
+      <li><strong>Keep the background and lighting identical</strong> in every episode. The model learns from whatever is in frame, cardboard included.</li>
+      <li><strong>Treat the camera as fixed once mounted.</strong> Moving it later doesn't destroy anything, but a trained policy expects the exact viewpoint it was trained on, so a shift means collecting new data and fine-tuning.</li>
+      <li><strong>Every episode starts after the print, with the door closed.</strong> The X1E locks its door while printing.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="build">
+  <div class="sec-head col"><div class="eyebrow">Hardware</div><h2>Things to make or buy</h2></div>
+  <ul class="build">
+    <li><strong>Printed vertical bar handle</strong> on the door's free edge. The gripper closes around it to swing the door.<span class="who">all door layouts</span></li>
+    <li><strong>Printed clip-on grip tab</strong> for the build plate, about 45 mm long. The stock tab is too short for the 2F-85 pads; the lower pad hits the heatbed.<span class="who">pull layouts</span></li>
+    <li><strong>200 mm stand</strong> under the printer.<span class="who">pick + pull, pick in place</span></li>
+    <li><strong>Clamp arm or floor tripod</strong> for the third-person camera. The good spots are past the table edge.<span class="who">camera</span></li>
+    <li><strong>End G-code change</strong> so the bed parks at the chosen Z after each print.<span class="who">all layouts</span></li>
+    <li><strong>Magnet</strong> to hold the door open.<span class="who">optional</span></li>
+    <li><strong>AprilTag</strong> to calibrate the camera pose.<span class="who">optional</span></li>
+  </ul>
+</section>
+
+<section id="limits" class="col">
+  <div class="sec-head"><div class="eyebrow">Caveats</div><h2>Limits</h2></div>
+  <ul>
+    <li>This is a kinematics and clearance study, not a motion planner. Motions are checked at waypoints 1.5–8 cm apart, not continuously in between.</li>
+    <li>The printed parts and contact forces (peeling a part off the plate, flexing the plate) are not modeled.</li>
+    <li>The results will change once the printer is measured.</li>
+  </ul>
+</section>
+
+<section id="todo" class="col">
+  <div class="sec-head"><div class="eyebrow">Action</div><h2>Your next steps</h2></div>
+  <ol class="steps">
+    <li><strong>Measure the printer</strong> and enter the numbers in the form below.</li>
+    <li><strong>Decide</strong>: pull the plate out, pick in place, or keep both open.</li>
+    <li><strong>Pick the VLA model</strong> (decides camera E or F) and the RealSense models.</li>
+    <li><strong>Choose where picked parts go.</strong> The bin must be in the camera frame.</li>
+    <li><strong>Make the printed handle and grip tab</strong>, and get a stand and camera mount as the chosen layout needs.</li>
+  </ol>
+</section>
+
+<section id="measure">
+  <div class="sec-head col"><div class="eyebrow">Your input</div><h2>Measurement form</h2>
+    <p>Every field below is a number the study currently guesses. The grey value in each box is the estimate in use now. Measure what you can, in millimetres unless the field says otherwise, and leave the rest empty. You can save part of it and come back; the form reopens with your saved answers.</p>
+    <p class="small muted">"Printer base" means the surface the printer stands on. Measure with the bed parked where it ends up after a print unless the field says otherwise. Photos help too: send them to Vijey directly.</p>
+  </div>
+
+  <form class="form" id="mform" novalidate>
+    <div class="form-status" aria-live="polite">
+      <span id="conn"><span class="dot" id="conn-dot"></span><span id="conn-text">Connecting…</span></span>
+      <span class="progress" id="progress"></span>
+    </div>
+    <div id="fieldsets" style="display:grid;gap:30px"></div>
+    <div class="f">
+      <label for="m_notes">Anything else Vijey should know</label>
+      <textarea id="m_notes" placeholder="Odd shapes, things in the way, how you measured, what you couldn't reach…"></textarea>
+    </div>
+    <div class="actions">
+      <button class="btn" id="save" type="submit">Save answers</button>
+      <button class="btn ghost" id="copy" type="button">Copy answers as text</button>
+      <span id="save-msg" role="status"></span>
+    </div>
+    <textarea id="copy-fallback" hidden readonly aria-label="Answers as text"></textarea>
+  </form>
+</section>
+
+<footer>
+  <div class="sec-head"><div class="eyebrow">Notes and sources</div></div>
+  <ul>
+    <li>The UR5 CB3 model is built from Universal Robots' published dimensions; MuJoCo's ready-made library only has the e-Series UR5e. Its kinematics match the published values exactly.</li>
+    <li>The simulation code comes to you separately. On a Mac, use the virtual environment steps in its README (<code>pip</code> isn't on a Mac's PATH and system-wide installs are blocked).</li>
+    <li>Bambu Lab X1E spec sheet (outer size, build volume): <a href="https://3dprintergear.com.au/assets/brochures/BL_X1E.pdf">3dprintergear.com.au</a></li>
+    <li>MatterHackers X1E listing (AMS adds 224 mm height): <a href="https://matterhackers.com/store/l/bambu-lab-x1e-3d-printer">matterhackers.com</a></li>
+    <li>3DDevice X1E Combo listing (door lock during print): <a href="https://3ddevice.com.ua/en/product/3d-printer-bambu-lab-x1e-combo">3ddevice.com.ua</a></li>
+    <li>MuJoCo Menagerie (Robotiq 2F-85, RealSense D435i models): <a href="https://github.com/google-deepmind/mujoco_menagerie">github.com/google-deepmind/mujoco_menagerie</a></li>
+    <li>ros-industrial universal_robot (UR5 CB3 meshes and link frames): <a href="https://github.com/ros-industrial/universal_robot">github.com/ros-industrial/universal_robot</a></li>
+  </ul>
+</footer>
+
+</div>
+
+<script>
+/* ---------- numbers copied from layout.json, results/summary.json, results/camera_compare_both.json, config.py ---------- */
+const GEO = {                      // config.py (printer frame, mm)
+  printerW: 389, printerD: 389, plate: 257, plateFrontY: 65,
+  hingeX: -(165 + 20), doorW: 360,  // door_open_x_half + 20 mm, door_panel_w
+  tableW: 914, tableL: 1829,        // printer at one end, 30 mm from the table's back edge (render.py)
+  baseR: 74.5, reach: 850
+};
+const LAYOUTS = {
+  pull: { x: -350, d: 850, door: 90, label: "−350 mm" },
+  both: { x: 125,  d: 750, door: 75, label: "+125 mm" }   // door metric 0.875 = 7 of 8 waypoints = 75°
+};
+const CAMS = {                     // camera_compare_both.json: x, y (printer frame), height above table
+  A: [300, -700, 1.05], E: [950, -1150, 1.28], F: [600, -800, 0.95]
+};
+const PICK_MAP = {                 // summary.json both.result.pick_map, row 0 = front
+  both: [[0,1,1,1,0],[0,1,1,1,0],[0,1,1,1,0],[0,0,0,0,0],[0,0,0,0,0]]
+};
+
+/* ---------- top-view drawings (SVG units = mm, y flipped so "into the printer" is up) ---------- */
+function drawLayout(key, el) {
+  const L = LAYOUTS[key], G = GEO;
+  const bx = L.x, by = L.d;                       // svg y of the base = +distance
+  const x0 = key === "pull" ? -1260 : -760, x1 = key === "pull" ? 660 : 1120;
+  const y0 = -560, y1 = 1760;
+  const tY0 = -(G.printerD + 30), tY1 = tY0 + G.tableL;
+  const fs = 54;
+  const s = [];
+  s.push(`<svg viewBox="${x0} ${y0} ${x1 - x0} ${y1 - y0}" xmlns="http://www.w3.org/2000/svg">`);
+  s.push(`<defs><marker id="ar-${key}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="var(--ink)"/></marker>
+          <clipPath id="clip-${key}"><rect x="${x0}" y="${y0}" width="${x1 - x0}" height="${y1 - y0}"/></clipPath></defs>`);
+  s.push(`<g clip-path="url(#clip-${key})">`);
+  // table
+  s.push(`<rect x="${-G.tableW / 2}" y="${tY0}" width="${G.tableW}" height="${G.tableL}" fill="var(--table)" stroke="var(--ink)" stroke-width="5"/>`);
+  // reach circle
+  s.push(`<circle cx="${bx}" cy="${by}" r="${G.reach}" fill="none" stroke="var(--arm)" stroke-width="5" stroke-dasharray="22 16"/>`);
+  // door swing and panel
+  const a0 = 0, aEnd = 95 * Math.PI / 180;
+  const sx = G.hingeX + G.doorW, sy = 0;
+  const ex = G.hingeX + G.doorW * Math.cos(aEnd), ey = G.doorW * Math.sin(aEnd);
+  s.push(`<path d="M${G.hingeX} 0 L${sx} ${sy} A${G.doorW} ${G.doorW} 0 0 1 ${ex.toFixed(1)} ${ey.toFixed(1)} Z" fill="var(--door)" fill-opacity="0.16" stroke="var(--door)" stroke-opacity="0.5" stroke-width="3"/>`);
+  const a = L.door * Math.PI / 180;
+  const dx = G.hingeX + G.doorW * Math.cos(a), dy = G.doorW * Math.sin(a);
+  s.push(`<line x1="${G.hingeX}" y1="0" x2="${dx.toFixed(1)}" y2="${dy.toFixed(1)}" stroke="var(--door)" stroke-width="16" stroke-linecap="round"/>`);
+  s.push(`<text class="t" x="${(dx - 30).toFixed(0)}" y="${(dy + 70).toFixed(0)}" font-size="${fs * 0.85}" text-anchor="end" style="fill:var(--door)">door ${L.door}°</text>`);
+  // printer + plate
+  s.push(`<rect x="${-G.printerW / 2}" y="${-G.printerD}" width="${G.printerW}" height="${G.printerD}" fill="var(--printer)" stroke="var(--ink)" stroke-width="4"/>`);
+  s.push(`<rect x="${-G.plate / 2}" y="${-(G.plateFrontY + G.plate)}" width="${G.plate}" height="${G.plate}" fill="var(--plate)" opacity="0.9"/>`);
+  s.push(`<text class="t" x="0" y="${tY0 - 34}" font-size="${fs}" text-anchor="middle">X1E + AMS</text>`);
+  // centerline and origin
+  s.push(`<line x1="0" y1="0" x2="0" y2="${by + 200}" stroke="var(--muted)" stroke-width="3" stroke-dasharray="6 12"/>`);
+  s.push(`<circle cx="0" cy="0" r="14" fill="var(--accent)"/>`);
+  // cameras (pick + pull only)
+  if (key === "both") {
+    const [ax, ay] = CAMS.A;
+    s.push(`<g opacity="0.85"><circle cx="${ax}" cy="${-ay}" r="26" fill="none" stroke="var(--old)" stroke-width="5" stroke-dasharray="8 7"/>
+            <line x1="${ax - 20}" y1="${-ay - 20}" x2="${ax + 20}" y2="${-ay + 20}" stroke="var(--old)" stroke-width="5"/>
+            <text class="t" x="${ax + 40}" y="${-ay - 36}" font-size="${fs * 0.75}" style="fill:var(--old)">A (old, not recommended)</text></g>`);
+    for (const k of ["E", "F"]) {
+      const [cx, cy, h] = CAMS[k];
+      s.push(`<rect x="${cx - 34}" y="${-cy - 22}" width="68" height="44" rx="6" fill="var(--cam)"/>
+              <text class="t" x="${cx}" y="${-cy + 72}" font-size="${fs * 0.85}" text-anchor="middle" style="fill:var(--cam);font-weight:600">${k} · ${h.toFixed(2)} m up</text>`);
+    }
+  }
+  // arm base
+  s.push(`<circle cx="${bx}" cy="${by}" r="${G.baseR}" fill="var(--arm)" stroke="var(--ink)" stroke-width="5"/>`);
+  s.push(`<text x="${bx}" y="${by + 17}" font-size="46" text-anchor="middle" font-weight="700" fill="#ffffff" font-family="var(--body)">UR5</text>`);
+  // dimension: distance
+  const dimX = bx - 150, dimLeft = key === "pull";
+  s.push(`<line x1="${dimX}" y1="4" x2="${dimX}" y2="${by - 4}" stroke="var(--ink)" stroke-width="4" marker-start="url(#ar-${key})" marker-end="url(#ar-${key})"/>`);
+  s.push(`<line x1="${dimX - 30}" y1="${by}" x2="${bx - G.baseR}" y2="${by}" stroke="var(--ink)" stroke-width="2" stroke-dasharray="6 6"/>`);
+  s.push(`<text class="t" x="${dimLeft ? dimX - 20 : dimX + 40}" y="${by / 2}" font-size="${fs}" text-anchor="${dimLeft ? "end" : "start"}" font-weight="600">${L.d} mm</text>`);
+  // dimension: x
+  const dy2 = by + 150;
+  s.push(`<line x1="0" y1="${dy2}" x2="${bx}" y2="${dy2}" stroke="var(--ink)" stroke-width="4" marker-start="url(#ar-${key})" marker-end="url(#ar-${key})"/>`);
+  s.push(`<line x1="${bx}" y1="${by + G.baseR}" x2="${bx}" y2="${dy2 + 20}" stroke="var(--ink)" stroke-width="2" stroke-dasharray="6 6"/>`);
+  s.push(`<text class="t" x="${bx / 2}" y="${dy2 + 70}" font-size="${fs}" text-anchor="middle" font-weight="600">x ${L.label}</text>`);
+  // labels
+  s.push(`<text class="t" x="${-G.tableW / 2 + 24}" y="${tY1 - 30}" font-size="${fs * 0.75}" style="fill:var(--muted)">table 914 × 1829 mm (3 × 6 ft)</text>`);
+  s.push(`<text class="t" x="${bx + G.reach * 0.62}" y="${by + G.reach * 0.86}" font-size="${fs * 0.75}" style="fill:var(--arm)">850 mm reach</text>`);
+  s.push(`<text class="t" x="28" y="56" font-size="${fs * 0.72}" style="fill:var(--accent)">origin</text>`);
+  s.push(`</g></svg>`);
+  el.innerHTML = s.join("");
+}
+drawLayout("pull", document.getElementById("draw-pull"));
+drawLayout("both", document.getElementById("draw-both"));
+
+function drawPlateMap(key, el) {
+  const m = PICK_MAP[key], c = 24, g = 2, ox = 6, oy = 18, s = [];
+  s.push(`<text x="66" y="12" font-size="11" text-anchor="middle" fill="var(--muted)" font-family="var(--body)">back (toolhead)</text>`);
+  for (let iy = 0; iy < 5; iy++) for (let ix = 0; ix < 5; ix++) {
+    const x = ox + ix * c, y = oy + (4 - iy) * c;          // row 0 = front, drawn at the bottom
+    const on = m[iy][ix] > 0;
+    s.push(`<rect class="pm-cell" x="${x}" y="${y}" width="${c}" height="${c}" fill="${on ? "var(--accent)" : "var(--rule)"}"/>`);
+  }
+  s.push(`<rect x="${ox}" y="${oy + 5 * c + 6}" width="${5 * c}" height="5" fill="var(--door)"/>`);
+  s.push(`<text x="66" y="${oy + 5 * c + 26}" font-size="11" text-anchor="middle" fill="var(--muted)" font-family="var(--body)">front (door)</text>`);
+  el.innerHTML = s.join("");
+}
+drawPlateMap("both", document.getElementById("pm-both"));
+
+/* ---------- measurement form ---------- */
+const GROUPS = [
+  ["door", "Door opening"], ["interior", "Inside the printer"], ["plate", "Build plate"],
+  ["toolhead", "Toolhead and gantry after the end G-code"], ["ams", "AMS"],
+  ["wrist", "Wrist camera and gripper"], ["cams", "Camera models"]
+];
+const FIELDS = [
+  { id: "door_open_width", g: "door", label: "Door opening width", unit: "mm", est: "330", cfg: "door_open_x_half (× 2)", help: "Clear width of the hole the arm reaches through, inside the frame." },
+  { id: "door_sill_height", g: "door", label: "Sill height", unit: "mm", est: "45", cfg: "door_open_z_min", help: "From the printer base to the bottom edge of the opening." },
+  { id: "door_top_height", g: "door", label: "Top of the opening", unit: "mm", est: "390", cfg: "door_open_z_max", help: "From the printer base to the underside of the top frame bar." },
+  { id: "door_hinge_side", g: "door", label: "Hinge side", type: "select", options: ["", "left", "right"], est: "left", cfg: "door_hinge_side", help: "Looking at the printer from the front." },
+  { id: "door_panel_w", g: "door", label: "Glass door width", unit: "mm", est: "360", cfg: "door_panel_w", help: "Width of the door panel itself." },
+  { id: "door_panel_h", g: "door", label: "Glass door height", unit: "mm", est: "370", cfg: "door_panel_h", help: "Height of the door panel itself." },
+  { id: "door_max_angle", g: "door", label: "How far the door opens", unit: "°", est: "90", cfg: "door_open_angle_deg", help: "Widest angle before it hits a stop (checklist item; the study uses 90°)." },
+  { id: "side_wall", g: "interior", label: "Side wall thickness", unit: "mm", est: "25", cfg: "side_wall", help: "From the outside face to the inside face, at the door." },
+  { id: "back_wall", g: "interior", label: "Back wall thickness", unit: "mm", est: "50", cfg: "back_wall", help: "Including filters and electronics that stick into the chamber." },
+  { id: "lid_inner_z", g: "interior", label: "Underside of the top lid", unit: "mm", est: "430", cfg: "lid_inner_z", help: "Height above the printer base." },
+  { id: "plate_front_y", g: "plate", label: "Plate front edge behind the front face", unit: "mm", est: "65", cfg: "plate_front_y", help: "Horizontal distance from the printer's front face to the plate's front edge." },
+  { id: "stock_tab", g: "plate", label: "Stock plate tab overhang", unit: "mm", est: "20", cfg: "plate_tab_depth (stock tab)", help: "How far the plate's own tab sticks out past the heatbed." },
+  { id: "nozzle_tip_z", g: "plate", label: "Plate surface height at Z = 0", unit: "mm", est: "335", cfg: "nozzle_tip_z", help: "Plate top above the printer base with the bed fully up (Z = 0)." },
+  { id: "toolhead_park_x", g: "toolhead", label: "Toolhead center, left/right", unit: "mm", est: "−30", cfg: "toolhead_park_x", help: "Left (−) or right (+) of the printer's center, after the end G-code runs." },
+  { id: "toolhead_park_y", g: "toolhead", label: "Toolhead center, behind the front face", unit: "mm", est: "290", cfg: "toolhead_park_y", help: "Distance back from the printer's front face." },
+  { id: "toolhead_w", g: "toolhead", label: "Toolhead width", unit: "mm", est: "80", cfg: "toolhead_size[0]", help: "Left to right." },
+  { id: "toolhead_d", g: "toolhead", label: "Toolhead depth", unit: "mm", est: "90", cfg: "toolhead_size[1]", help: "Front to back." },
+  { id: "toolhead_h", g: "toolhead", label: "Toolhead height above the nozzle tip", unit: "mm", est: "90", cfg: "toolhead_size[2]", help: "From the nozzle tip to the top of the toolhead." },
+  { id: "gantry_bottom", g: "toolhead", label: "Gantry beam bottom above the nozzle tip", unit: "mm", est: "50", cfg: "gantry_beam_z[0]", help: "The X beam the toolhead rides on." },
+  { id: "gantry_top", g: "toolhead", label: "Gantry beam top above the nozzle tip", unit: "mm", est: "85", cfg: "gantry_beam_z[1]", help: "" },
+  { id: "ams_width", g: "ams", label: "AMS width", unit: "mm", est: "370", cfg: "ams_width", help: "Footprint on top of the printer, left to right." },
+  { id: "ams_depth", g: "ams", label: "AMS depth", unit: "mm", est: "290", cfg: "ams_depth", help: "Footprint on top of the printer, front to back." },
+  { id: "wrist_cam_offset", g: "wrist", label: "Wrist camera offset from the tool axis", unit: "mm", est: "75", cfg: "wrist_cam_offset", help: "Camera center to the line through the middle of the gripper." },
+  { id: "wrist_cam_z", g: "wrist", label: "Wrist camera height above the flange", unit: "mm", est: "35", cfg: "wrist_cam_z", help: "Along the tool axis, from the robot's tool flange to the camera center." },
+  { id: "wrist_cam_tilt", g: "wrist", label: "Wrist camera tilt toward the fingers", unit: "°", est: "20", cfg: "wrist_cam_tilt_deg", help: "0° = looking parallel to the gripper." },
+  { id: "tcp_offset", g: "wrist", label: "Grasp point from the flange", unit: "mm", est: "155.8", cfg: "tcp_offset", help: "Flange to the middle of the fingertip pads, with the real coupling (checklist item)." },
+  { id: "wrist_cam_model", g: "cams", label: "Wrist camera model", type: "select", options: ["", "D405", "D435", "D435i", "D455", "other / not sure"], est: "D405", cfg: "wrist_cam_fovy_deg", help: "Sets the field of view. Check the label on the camera." },
+  { id: "scene_cam_model", g: "cams", label: "Third-person camera model", type: "select", options: ["", "D405", "D435", "D435i", "D455", "other / not sure"], est: "D435", cfg: "camera study FOV", help: "The camera search assumed the D435 field of view." }
+];
+
+const fsWrap = document.getElementById("fieldsets");
+for (const [gid, gname] of GROUPS) {
+  const fset = document.createElement("fieldset");
+  const lg = document.createElement("legend"); lg.textContent = gname; fset.appendChild(lg);
+  const grid = document.createElement("div"); grid.className = "fgrid";
+  for (const f of FIELDS.filter(f => f.g === gid)) {
+    const box = document.createElement("div"); box.className = "f"; box.id = "box_" + f.id;
+    const lab = document.createElement("label"); lab.htmlFor = "m_" + f.id; lab.textContent = f.label;
+    const wrap = document.createElement("div"); wrap.className = "inwrap";
+    let input;
+    if (f.type === "select") {
+      input = document.createElement("select");
+      for (const o of f.options) {
+        const op = document.createElement("option"); op.value = o;
+        op.textContent = o === "" ? `not measured (estimate: ${f.est})` : o; input.appendChild(op);
+      }
+    } else {
+      input = document.createElement("input"); input.type = "text"; input.inputMode = "decimal";
+      input.autocomplete = "off"; input.placeholder = "est. " + f.est;
+    }
+    input.id = "m_" + f.id; input.name = f.id;
+    wrap.appendChild(input);
+    if (f.unit) { const u = document.createElement("span"); u.className = "unit"; u.textContent = f.unit; wrap.appendChild(u); }
+    box.append(lab, wrap);
+    if (f.help) { const h = document.createElement("div"); h.className = "help"; h.textContent = f.help; box.appendChild(h); }
+    const meta = document.createElement("div"); meta.className = "meta";
+    const c = document.createElement("span"); c.textContent = f.cfg;
+    const e = document.createElement("span"); e.textContent = "estimate " + f.est + (f.unit ? " " + f.unit : "");
+    meta.append(c, e); box.appendChild(meta);
+    grid.appendChild(box);
+  }
+  fset.appendChild(grid); fsWrap.appendChild(fset);
+}
+
+const $ = id => document.getElementById(id);
+const dirty = new Set();
+const DRAFT_KEY = "ur5x1e-measure-draft";
+
+function readForm() {
+  const values = {};
+  for (const f of FIELDS) { const v = $("m_" + f.id).value.trim(); if (v) values[f.id] = v; }
+  return { values, notes: $("m_notes").value.trim() };
+}
+function refreshProgress() {
+  let n = 0;
+  for (const f of FIELDS) {
+    const on = $("m_" + f.id).value.trim() !== "";
+    $("box_" + f.id).classList.toggle("filled", on); if (on) n++;
+  }
+  $("progress").textContent = `${n} of ${FIELDS.length} filled in`;
+}
+function fillForm(data, onlyClean) {
+  const vals = (data && data.values) || {};
+  for (const f of FIELDS) {
+    if (onlyClean && dirty.has(f.id)) continue;
+    $("m_" + f.id).value = vals[f.id] != null ? String(vals[f.id]) : "";
+  }
+  if (!(onlyClean && dirty.has("notes"))) $("m_notes").value = (data && data.notes) || "";
+  refreshProgress();
+}
+
+let draftTimer = null;
+$("mform").addEventListener("input", ev => {
+  const id = ev.target.id === "m_notes" ? "notes" : ev.target.name;
+  if (id) dirty.add(id);
+  refreshProgress();
+  clearTimeout(draftTimer);
+  draftTimer = setTimeout(() => { try { localStorage.setItem(DRAFT_KEY, JSON.stringify(readForm())); } catch (e) {} }, 600);
+});
+try { const d = JSON.parse(localStorage.getItem(DRAFT_KEY) || "null"); if (d) { fillForm(d, false); Object.keys(d.values || {}).forEach(k => dirty.add(k)); if (d.notes) dirty.add("notes"); } } catch (e) {}
+refreshProgress();
+
+function answersText() {
+  const { values, notes } = readForm();
+  const lines = ["UR5 + X1E measurements (mm unless noted)", ""];
+  for (const f of FIELDS) lines.push(`${f.label} [${f.cfg}]: ${values[f.id] ? values[f.id] + (f.unit ? " " + f.unit : "") : "not measured"}`);
+  if (notes) lines.push("", "Notes: " + notes);
+  return lines.join("\n");
+}
+$("copy").addEventListener("click", () => {
+  const txt = answersText(), fb = $("copy-fallback");
+  const showFallback = () => { fb.hidden = false; fb.value = txt; fb.focus(); fb.select(); $("save-msg").textContent = "Select-all and copy the text below, then send it to Vijey."; };
+  try {
+    navigator.clipboard.writeText(txt).then(() => { $("save-msg").textContent = "Copied. Paste it into a message to Vijey."; }, showFallback);
+  } catch (e) { showFallback(); }
+});
+
+function setConn(state, text) {
+  $("conn-dot").className = "dot" + (state === "ok" ? " ok" : state === "bad" ? " bad" : "");
+  $("conn-text").textContent = text;
+}
+function fmtTime(iso) {
+  try { return new Date(iso).toLocaleString([], { dateStyle: "medium", timeStyle: "short" }); } catch (e) { return iso; }
+}
+
+let db = null, me = null, canSave = false;
+const saveBtn = $("save");
+saveBtn.disabled = true;
+$("mform").addEventListener("submit", async ev => {
+  ev.preventDefault();
+  if (!db || !canSave) return;
+  const { values, notes } = readForm();
+  const body = { values, notes, savedAt: new Date().toISOString(), savedBy: me, form: "v1" };
+  saveBtn.disabled = true; $("save-msg").textContent = "Saving…";
+  try {
+    await db.doc("measurements/printer").set(body);
+    dirty.clear();
+    try { localStorage.removeItem(DRAFT_KEY); } catch (e) {}
+    $("save-msg").textContent = `Saved ${fmtTime(body.savedAt)}. Vijey can read these now.`;
+    try { await db.collection("measurement_log").add(body); } catch (e) {}
+  } catch (e) {
+    if (e && (e.code === "invalid_argument" || e.code === "not_granted")) {
+      canSave = false;
+      setConn("bad", "This view can't save answers.");
+      $("save-msg").textContent = "Saving needs edit access to this page. Use “Copy answers as text” and send them to Vijey, or ask him for edit access.";
+    } else if (e && e.code === "quota_exceeded") {
+      $("save-msg").textContent = "The page's storage is full. Use “Copy answers as text” and send them to Vijey.";
+    } else {
+      $("save-msg").textContent = "Couldn't save just now. Try again in a moment, or copy the answers as text.";
+    }
+  } finally { saveBtn.disabled = !canSave; }
+});
+
+async function boot() {
+  const user = window.claude && window.claude.use ? await window.claude.use("user") : null;
+  db = window.claude && window.claude.use ? await window.claude.use("db") : null;
+  me = user ? await user.id() : null;
+  const isOwner = user ? await user.isOwner() : false;
+
+  // Vijey's note
+  if (db) {
+    const noteRef = db.doc("notes/intro");
+    noteRef.onSnapshot(snap => {
+      const txt = snap.exists ? String((snap.data() || {}).text || "") : "";
+      $("vnote-text").textContent = txt;
+      $("vnote-text").hidden = !txt;
+      if (isOwner && document.activeElement !== $("vnote-input")) $("vnote-input").value = txt;
+      $("vnote-sec").hidden = !(txt || isOwner);
+    }, () => {});
+    if (isOwner) {
+      $("vnote-sec").hidden = false; $("vnote-edit").hidden = false;
+      $("vnote-save").addEventListener("click", async () => {
+        $("vnote-msg").textContent = "Saving…";
+        try { await noteRef.set({ text: $("vnote-input").value.trim(), updatedAt: new Date().toISOString() }); $("vnote-msg").textContent = "Saved."; }
+        catch (e) { $("vnote-msg").textContent = "Couldn't save the note. Try again."; }
+      });
+    }
+  }
+
+  // Measurements
+  if (!db) {
+    setConn("bad", "Saving isn't available in this view. Fill in the form and use “Copy answers as text”.");
+    return;
+  }
+  const can = user ? await user.can("data.write") : null;
+  canSave = can !== false;
+  if (canSave) {
+    setConn("ok", "Answers you save go straight to Vijey.");
+  } else {
+    setConn("bad", "This view can't save answers. Fill in the form and use “Copy answers as text”.");
+  }
+  saveBtn.disabled = !canSave;
+  db.doc("measurements/printer").onSnapshot(snap => {
+    if (!snap.exists) return;
+    const d = snap.data() || {};
+    fillForm(d, true);
+    if (d.savedAt && !$("save-msg").textContent) $("save-msg").textContent = `Last saved ${fmtTime(d.savedAt)}.`;
+  }, () => {});
+}
+boot();
+</script>
