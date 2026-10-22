@@ -1,0 +1,110 @@
+[
+ {
+  "camera": "current (study pick)",
+  "key": "A",
+  "pos": [
+   0.3,
+   -0.7,
+   0.85
+  ],
+  "above_table_m": 1.05,
+  "part_px": 4.3,
+  "grip_frame": 1.0,
+  "grip_seen": 0.99,
+  "plate_seen": 0.96,
+  "plate_clear": 0.72,
+  "elbow_frame": 0.35,
+  "base_frame": false,
+  "keep_out": 0.57
+ },
+ {
+  "camera": "side-on, right of printer",
+  "key": "B",
+  "pos": [
+   0.62,
+   -0.3,
+   0.55
+  ],
+  "above_table_m": 0.75,
+  "part_px": 5.7,
+  "grip_frame": 1.0,
+  "grip_seen": 0.9,
+  "plate_seen": 0.16,
+  "plate_clear": 0.62,
+  "elbow_frame": 0.1,
+  "base_frame": false,
+  "keep_out": 0.61
+ },
+ {
+  "camera": "high front-right, looking down",
+  "key": "C",
+  "pos": [
+   0.42,
+   -0.55,
+   0.94
+  ],
+  "above_table_m": 1.14,
+  "part_px": 4.3,
+  "grip_frame": 1.0,
+  "grip_seen": 1.0,
+  "plate_seen": 0.68,
+  "plate_clear": 0.69,
+  "elbow_frame": 0.03,
+  "base_frame": false,
+  "keep_out": 0.7
+ },
+ {
+  "camera": "left-front, beyond the open door",
+  "key": "D",
+  "pos": [
+   -0.45,
+   -1.05,
+   0.68
+  ],
+  "above_table_m": 0.89,
+  "part_px": 3.4,
+  "grip_frame": 1.0,
+  "grip_seen": 0.52,
+  "plate_seen": 0.08,
+  "plate_clear": 0.42,
+  "elbow_frame": 0.99,
+  "base_frame": false,
+  "keep_out": 0.73
+ },
+ {
+  "camera": "whole cell, high and far",
+  "key": "E",
+  "pos": [
+   0.95,
+   -1.15,
+   1.08
+  ],
+  "above_table_m": 1.28,
+  "part_px": 2.7,
+  "grip_frame": 1.0,
+  "grip_seen": 1.0,
+  "plate_seen": 0.56,
+  "plate_clear": 0.67,
+  "elbow_frame": 1.0,
+  "base_frame": true,
+  "keep_out": 1.18
+ },
+ {
+  "camera": "middle ground: arm from elbow out",
+  "key": "F",
+  "pos": [
+   0.6,
+   -0.8,
+   0.75
+  ],
+  "above_table_m": 0.95,
+  "part_px": 3.8,
+  "grip_frame": 1.0,
+  "grip_seen": 1.0,
+  "plate_seen": 0.72,
+  "plate_clear": 0.69,
+  "elbow_frame": 0.99,
+  "base_frame": false,
+  "keep_out": 0.64
+ }
+]

@@ -1,0 +1,7 @@
+# Versions verified on macOS, Python 3.11 (2026-10-21). scipy >= 1.14 is required (as_quat(scalar_first=True)).
+mujoco==3.16.0
+numpy==2.4.6
+scipy==1.17.1
+matplotlib==3.11.2
+pillow==13.0.0
+trimesh==5.1.1

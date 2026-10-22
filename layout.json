@@ -1,0 +1,77 @@
+{
+  "active": "both",
+  "layouts": {
+    "pick": {
+      "scenario": "door",
+      "objective": "pick",
+      "base_x": 0.35,
+      "base_dist": 0.6,
+      "fits_3ft_side_layout": false,
+      "rel_height": -0.2,
+      "bed_z": 200,
+      "camera": [
+        -0.3,
+        -0.6,
+        0.85
+      ],
+      "branch": "shoulderB-wrist+-elbow-",
+      "score": 0.474,
+      "min_clearance_mm": 22,
+      "worst_score_within_2_5cm": 0.467
+    },
+    "pull": {
+      "scenario": "door",
+      "objective": "pull",
+      "base_x": -0.35,
+      "base_dist": 0.85,
+      "fits_3ft_side_layout": false,
+      "rel_height": 0.0,
+      "bed_z": 100,
+      "camera": [
+        0.5,
+        -1.3,
+        1.05
+      ],
+      "branch": "shoulderA-wrist+-elbow+",
+      "score": 0.999,
+      "min_clearance_mm": 22,
+      "worst_score_within_2_5cm": 0.985
+    },
+    "both": {
+      "scenario": "door",
+      "objective": "both",
+      "base_x": 0.125,
+      "base_dist": 0.75,
+      "fits_3ft_side_layout": false,
+      "rel_height": -0.2,
+      "bed_z": 200,
+      "camera": [
+        0.3,
+        -0.7,
+        0.85
+      ],
+      "branch": "shoulderA-wrist--elbow+",
+      "score": 0.683,
+      "min_clearance_mm": 26,
+      "worst_score_within_2_5cm": 0.658
+    },
+    "top": {
+      "scenario": "top",
+      "objective": "top",
+      "base_x": -0.3,
+      "base_dist": 0.2,
+      "fits_3ft_side_layout": true,
+      "rel_height": 0.1,
+      "bed_z": 50,
+      "camera": [
+        0.3,
+        -0.1,
+        1.05
+      ],
+      "branch": "shoulderA-wrist--elbow+",
+      "score": 0.238,
+      "min_clearance_mm": 22,
+      "worst_score_within_2_5cm": 0.238
+    }
+  }
+}

@@ -1,0 +1,290 @@
+<mujoco model="ur5_x1e_cell">
+  <compiler angle="radian" meshdir="assets"/>
+
+  <option impratio="10" cone="elliptic"/>
+
+  <size nkey="1"/>
+
+  <statistic extent="1.4" center="0 -0.4 0.3"/>
+
+  <visual>
+    <global offwidth="1600" offheight="1200"/>
+  </visual>
+
+  <default>
+    <default class="g_main">
+      <default class="g_2f85">
+        <mesh scale="0.001 0.001 0.001"/>
+        <joint axis="1 0 0"/>
+        <general biastype="affine"/>
+        <default class="g_driver">
+          <joint solreflimit="0.005" solimplimit="0.95 0.99" range="0 0.8" armature="0.005" damping="0.1"/>
+        </default>
+        <default class="g_follower">
+          <joint solreflimit="0.005" solimplimit="0.95 0.99" range="-0.872664 0.872664" armature="0.001" pos="0 -0.018 0.0065"/>
+        </default>
+        <default class="g_spring_link">
+          <joint stiffness="0.05" range="-0.296706 0.8" springref="2.62" armature="0.001" damping="0.00125"/>
+        </default>
+        <default class="g_coupler">
+          <joint solreflimit="0.005" solimplimit="0.95 0.99" range="-1.57 0" armature="0.001"/>
+        </default>
+        <default class="g_visual">
+          <geom type="mesh" contype="0" conaffinity="0" group="2"/>
+        </default>
+        <default class="g_collision">
+          <geom type="mesh" group="3"/>
+          <default class="g_pad_box1">
+            <geom size="0.011 0.004 0.009375" type="box" priority="1" friction="0.7" solref="0.004" solimp="0.95 0.99" rgba="0.55 0.55 0.55 1"/>
+          </default>
+          <default class="g_pad_box2">
+            <geom size="0.011 0.004 0.009375" type="box" priority="1" friction="0.6" solref="0.004" solimp="0.95 0.99" rgba="0.45 0.45 0.45 1"/>
+          </default>
+        </default>
+      </default>
+    </default>
+  </default>
+
+  <asset>
+    <texture type="skybox" colorspace="auto" name="sky" builtin="gradient" rgb1="0.85 0.88 0.92" rgb2="0.55 0.6 0.68" width="512" height="3072"/>
+    <texture type="2d" colorspace="auto" name="grid" builtin="checker" rgb1="0.42 0.43 0.45" rgb2="0.38 0.39 0.41" width="512" height="512"/>
+    <material name="floor" texture="grid" texrepeat="8 8" reflectance="0.05"/>
+    <material name="g_metal" rgba="0.58 0.58 0.58 1"/>
+    <material name="g_silicone" rgba="0.1882 0.1882 0.1882 1"/>
+    <material name="g_gray" rgba="0.4627 0.4627 0.4627 1"/>
+    <material name="g_black" rgba="0.149 0.149 0.149 1"/>
+    <mesh name="ur5_base" file="ur5/base.stl"/>
+    <mesh name="ur5_shoulder" file="ur5/shoulder.stl"/>
+    <mesh name="ur5_upperarm" file="ur5/upperarm.stl"/>
+    <mesh name="ur5_forearm" file="ur5/forearm.stl"/>
+    <mesh name="ur5_wrist1" file="ur5/wrist1.stl"/>
+    <mesh name="ur5_wrist2" file="ur5/wrist2.stl"/>
+    <mesh name="ur5_wrist3" file="ur5/wrist3.stl"/>
+    <mesh name="d435i_0" file="d435i/d435i_0.obj"/>
+    <mesh name="d435i_1" file="d435i/d435i_1.obj"/>
+    <mesh name="d435i_2" file="d435i/d435i_2.obj"/>
+    <mesh name="d435i_3" file="d435i/d435i_3.obj"/>
+    <mesh name="d435i_4" file="d435i/d435i_4.obj"/>
+    <mesh name="d435i_5" file="d435i/d435i_5.obj"/>
+    <mesh name="d435i_6" file="d435i/d435i_6.obj"/>
+    <mesh name="d435i_7" file="d435i/d435i_7.obj"/>
+    <mesh name="d435i_8" file="d435i/d435i_8.obj"/>
+    <mesh name="g_base_mount" class="g_2f85" file="robotiq/base_mount.stl"/>
+    <mesh name="g_base" class="g_2f85" file="robotiq/base.stl"/>
+    <mesh name="g_driver" class="g_2f85" file="robotiq/driver.stl"/>
+    <mesh name="g_coupler" class="g_2f85" file="robotiq/coupler.stl"/>
+    <mesh name="g_follower" class="g_2f85" file="robotiq/follower.stl"/>
+    <mesh name="g_pad" class="g_2f85" file="robotiq/pad.stl"/>
+    <mesh name="g_silicone_pad" class="g_2f85" file="robotiq/silicone_pad.stl"/>
+    <mesh name="g_spring_link" class="g_2f85" file="robotiq/spring_link.stl"/>
+  </asset>
+
+  <worldbody>
+    <geom name="floor" size="4 4 0.05" pos="0 -0.6 -0.76" type="plane" contype="0" conaffinity="0" material="floor"/>
+    <camera name="scene_cam" target="plate" pos="0.75 -1 0.75" mode="targetbody" fovy="42"/>
+    <camera name="view_iso" target="ur_mount" pos="1.1 -1.55 1.05" mode="targetbody"/>
+    <camera name="view_side" target="plate" pos="1.35 -0.45 0.55" mode="targetbody"/>
+    <camera name="view_top" target="ur_mount" pos="0 -0.55 2.2" mode="targetbody"/>
+    <light pos="0.6 -1.4 2.2" dir="-0.249136 0.498273 -0.830455" diffuse="0.75 0.75 0.75" type="directional"/>
+    <light castshadow="false" pos="-1 -0.5 1.8" dir="0.440225 0.17609 -0.880451" diffuse="0.35 0.35 0.35" type="directional"/>
+    <light name="chamber_led" castshadow="false" pos="0 0.06 0.41" dir="0 0.287348 -0.957826" cutoff="70" diffuse="0.45 0.45 0.42"/>
+    <body name="table" pos="0 -0.4955 -0.2">
+      <geom name="table_top" size="0.457 0.9145 0.015" pos="0 0 -0.015" type="box" contype="2" margin="0.01" rgba="0.8 0.7 0.55 1"/>
+      <geom name="leg_-1_-1" size="0.025 0.025 0.36" pos="-0.417 -0.8745 -0.39" type="box" contype="0" conaffinity="0" rgba="0.3 0.3 0.32 1"/>
+      <geom name="leg_-1_1" size="0.025 0.025 0.36" pos="-0.417 0.8745 -0.39" type="box" contype="0" conaffinity="0" rgba="0.3 0.3 0.32 1"/>
+      <geom name="leg_1_-1" size="0.025 0.025 0.36" pos="0.417 -0.8745 -0.39" type="box" contype="0" conaffinity="0" rgba="0.3 0.3 0.32 1"/>
+      <geom name="leg_1_1" size="0.025 0.025 0.36" pos="0.417 0.8745 -0.39" type="box" contype="0" conaffinity="0" rgba="0.3 0.3 0.32 1"/>
+    </body>
+    <body name="printer">
+      <geom name="pr_wall_L" size="0.0125 0.1945 0.2285" pos="-0.182 0.1945 0.2285" type="box" contype="2" margin="0.02" rgba="0.16 0.17 0.19 1"/>
+      <geom name="pr_wall_R" size="0.0125 0.1945 0.2285" pos="0.182 0.1945 0.2285" type="box" contype="2" margin="0.02" rgba="0.16 0.17 0.19 1"/>
+      <geom name="pr_wall_back" size="0.1945 0.025 0.2285" pos="0 0.364 0.2285" type="box" contype="2" margin="0.02" rgba="0.16 0.17 0.19 1"/>
+      <geom name="pr_lid" size="0.1945 0.1945 0.0135" pos="0 0.1945 0.4435" type="box" contype="2" margin="0.02" rgba="0.3 0.32 0.35 0.9"/>
+      <geom name="pr_front_L" size="0.01475 0.017 0.2285" pos="-0.17975 0.013 0.2285" type="box" contype="2" margin="0.02" rgba="0.22 0.23 0.25 1"/>
+      <geom name="pr_front_R" size="0.01475 0.017 0.2285" pos="0.17975 0.013 0.2285" type="box" contype="2" margin="0.02" rgba="0.22 0.23 0.25 1"/>
+      <geom name="pr_front_bottom" size="0.1945 0.017 0.0225" pos="0 0.013 0.0225" type="box" contype="2" margin="0.02" rgba="0.22 0.23 0.25 1"/>
+      <geom name="pr_front_top" size="0.1945 0.017 0.0335" pos="0 0.013 0.4235" type="box" contype="2" margin="0.02" rgba="0.22 0.23 0.25 1"/>
+      <geom name="pr_stand" size="0.1845 0.1845 0.1" pos="0 0.1945 -0.1" type="box" contype="2" rgba="0.45 0.42 0.38 0"/>
+      <geom name="ams" size="0.185 0.145 0.112" pos="0 0.1945 0.569" type="box" contype="2" margin="0.02" rgba="0.85 0.85 0.86 1"/>
+      <geom name="ams_lid" size="0.175 0.135 0.003" pos="0 0.1945 0.68" type="box" contype="0" conaffinity="0" rgba="0.2 0.2 0.22 0.6"/>
+      <geom name="toolhead" size="0.04 0.045 0.045" pos="-0.03 0.29 0.38" type="box" contype="2" margin="0.02" rgba="0.1 0.1 0.1 1"/>
+      <geom name="gantry_beam" size="0.1695 0.02 0.0175" pos="0 0.29 0.4025" type="box" contype="2" margin="0.02" rgba="0.08 0.08 0.08 1"/>
+      <geom name="rail_L" size="0.015 0.1545 0.0225" pos="-0.1545 0.1845 0.4075" type="box" contype="2" margin="0.02" rgba="0.1 0.1 0.1 1"/>
+      <geom name="rail_R" size="0.015 0.1545 0.0225" pos="0.1545 0.1845 0.4075" type="box" contype="2" margin="0.02" rgba="0.1 0.1 0.1 1"/>
+    </body>
+    <body name="plate" pos="0 0.1935 0.135">
+      <geom name="plate_top" size="0.1285 0.1285 0.001" pos="0 0 -0.001" type="box" contype="2" margin="0.02" rgba="0.72 0.58 0.32 1"/>
+      <geom name="plate_tab" size="0.03 0.0225 0.001" pos="0 -0.151 -0.001" type="box" contype="2" margin="0.02" rgba="0.72 0.58 0.32 1"/>
+      <geom name="heatbed" size="0.1335 0.1385 0.01" pos="0 0.01 -0.012" type="box" contype="2" margin="0.02" rgba="0.25 0.25 0.27 1"/>
+      <geom name="bed_under" size="0.1085 0.1085 0.18" pos="0 0.01 -0.2" type="box" contype="2" margin="0.02" rgba="0.2 0.2 0.2 0.15"/>
+    </body>
+    <body name="door" pos="-0.185 -0.008 0">
+      <joint name="door_hinge" range="0 2.0944" axis="0 0 -1"/>
+      <geom name="door_glass" size="0.18 0.004 0.185" pos="0.18 -0.004 0.21" type="box" contype="2" margin="0.02" rgba="0.55 0.65 0.75 0.35"/>
+      <geom name="door_handle" size="0.008 0.008 0.045" pos="0.33 -0.035 0.21" type="box" contype="0" conaffinity="0" rgba="0.95 0.55 0.1 1"/>
+      <geom name="door_handle_stem" size="0.006 0.013 0.02" pos="0.33 -0.02 0.21" type="box" contype="0" conaffinity="0" rgba="0.95 0.55 0.1 1"/>
+      <site name="door_handle" size="0.006" pos="0.33 -0.035 0.21" group="4" rgba="1 0.2 0.2 1"/>
+    </body>
+    <body name="ur_mount" pos="0.125 -0.75 -0.2">
+      <geom name="riser" size="0.09 0.00025" pos="0 0 -0.00025" type="cylinder" contype="0" conaffinity="0" rgba="0.35 0.36 0.4 0"/>
+      <geom name="ur5_base" quat="0 0 0 1" type="mesh" conaffinity="3" rgba="0.75 0.77 0.8 1" mesh="ur5_base"/>
+      <body name="shoulder_link" pos="0 0 0.089159">
+        <joint name="shoulder_pan" range="-6.28319 6.28319" armature="0.1" damping="2" limited="true"/>
+        <geom name="ur5_shoulder" quat="0 0 0 1" type="mesh" conaffinity="3" rgba="0.75 0.77 0.8 1" mesh="ur5_shoulder"/>
+        <body name="upper_arm_link" quat="0.707107 0.707107 0 0">
+          <joint name="shoulder_lift" range="-6.28319 6.28319" armature="0.1" damping="2" limited="true"/>
+          <geom name="ur5_upperarm" pos="0 0 0.13585" quat="0.5 0.5 -0.5 -0.5" type="mesh" conaffinity="3" rgba="0.75 0.77 0.8 1" mesh="ur5_upperarm"/>
+          <body name="forearm_link" pos="-0.425 0 0">
+            <joint name="elbow" range="-3.14159 3.14159" armature="0.1" damping="2" limited="true"/>
+            <geom name="ur5_forearm" pos="0 0 0.0165" quat="0.5 0.5 -0.5 -0.5" type="mesh" conaffinity="3" rgba="0.75 0.77 0.8 1" mesh="ur5_forearm"/>
+            <body name="wrist_1_link" pos="-0.39225 0 0.10915">
+              <joint name="wrist_1" range="-6.28319 6.28319" armature="0.1" damping="2" limited="true"/>
+              <geom name="ur5_wrist1" pos="0 0 -0.093" quat="0.707107 0.707107 0 0" type="mesh" conaffinity="3" rgba="0.3 0.45 0.65 1" mesh="ur5_wrist1"/>
+              <body name="wrist_2_link" pos="0 -0.09465 0" quat="0.707107 0.707107 0 0">
+                <joint name="wrist_2" range="-6.28319 6.28319" armature="0.1" damping="2" limited="true"/>
+                <geom name="ur5_wrist2" pos="0 0 -0.095" quat="1 0 0 0" type="mesh" conaffinity="3" rgba="0.3 0.45 0.65 1" mesh="ur5_wrist2"/>
+                <body name="wrist_3_link" pos="0 0.0823 0" quat="0.707107 -0.707107 0 0">
+                  <joint name="wrist_3" range="-6.28319 6.28319" armature="0.1" damping="2" limited="true"/>
+                  <geom name="ur5_wrist3" pos="0 0 -0.0818" quat="0.707107 0.707107 0 0" type="mesh" conaffinity="3" rgba="0.3 0.45 0.65 1" mesh="ur5_wrist3"/>
+                  <site name="tool0" size="0.006" group="4"/>
+                  <body name="wrist_cam_mount">
+                    <geom name="wrist_cam_bracket" size="0.02 0.015 0.006" pos="0 -0.05 0.006" type="box" conaffinity="3" rgba="0.9 0.5 0.15 1"/>
+                    <body name="wrist_cam_body" pos="0 -0.075 0.035" quat="0.984808 -0.173648 0 0">
+                      <geom name="wrist_cam_box" size="0.045 0.0125 0.0125" type="box" conaffinity="3" rgba="0.15 0.15 0.17 1"/>
+                      <camera name="wrist_cam" quat="0 1 0 0" pos="0 0 0.013" fovy="58"/>
+                    </body>
+                  </body>
+                  <body name="g_base_mount" childclass="g_2f85" pos="0 0 0.007">
+                    <geom class="g_visual" quat="1 0 0 0" material="g_black" mesh="g_base_mount"/>
+                    <geom class="g_collision" quat="1 0 0 0" conaffinity="3" mesh="g_base_mount"/>
+                    <body name="g_base" pos="0 0 0.0038" quat="0.707107 0 0 -0.707107">
+                      <inertial pos="0 -2.70394e-05 0.0354675" quat="0.999999 -0.00152849 0 0" mass="0.777441" diaginertia="0.000260285 0.000225381 0.000152708"/>
+                      <geom class="g_visual" quat="1 0 0 0" material="g_black" mesh="g_base"/>
+                      <geom class="g_collision" quat="1 0 0 0" conaffinity="3" mesh="g_base"/>
+                      <site name="g_pinch" pos="0 0 0.145" group="5" rgba="0.9 0.9 0.9 1"/>
+                      <body name="g_right_driver" pos="0 0.0306011 0.054904">
+                        <inertial pos="2.96931e-12 0.0177547 0.00107314" quat="0.681301 0.732003 0 0" mass="0.00899563" diaginertia="1.72352e-06 1.60906e-06 3.22006e-07"/>
+                        <joint name="g_right_driver_joint" class="g_driver"/>
+                        <geom class="g_visual" quat="1 0 0 0" material="g_gray" mesh="g_driver"/>
+                        <geom class="g_collision" quat="1 0 0 0" conaffinity="3" mesh="g_driver"/>
+                        <body name="g_right_coupler" pos="0 0.0315 -0.0041">
+                          <inertial pos="0 0.00301209 0.0232175" quat="0.705636 -0.0455904 0.0455904 0.705636" mass="0.0140974" diaginertia="4.16206e-06 3.52216e-06 8.88131e-07"/>
+                          <joint name="g_right_coupler_joint" class="g_coupler"/>
+                          <geom class="g_visual" quat="1 0 0 0" material="g_black" mesh="g_coupler"/>
+                          <geom class="g_collision" quat="1 0 0 0" conaffinity="3" mesh="g_coupler"/>
+                        </body>
+                      </body>
+                      <body name="g_right_spring_link" pos="0 0.0132 0.0609">
+                        <inertial pos="-8.65005e-09 0.0181624 0.0212658" quat="0.663403 -0.244737 0.244737 0.663403" mass="0.0221642" diaginertia="8.96853e-06 6.71733e-06 2.63931e-06"/>
+                        <joint name="g_right_spring_link_joint" class="g_spring_link"/>
+                        <geom class="g_visual" quat="1 0 0 0" material="g_black" mesh="g_spring_link"/>
+                        <geom class="g_collision" quat="1 0 0 0" conaffinity="3" mesh="g_spring_link"/>
+                        <body name="g_right_follower" pos="0 0.055 0.0375">
+                          <inertial pos="0 -0.011046 0.0124786" quat="0.986437 0.164143 0 0" mass="0.0125222" diaginertia="2.67415e-06 2.4559e-06 6.02031e-07"/>
+                          <joint name="g_right_follower_joint" class="g_follower"/>
+                          <geom class="g_visual" material="g_black" mesh="g_follower"/>
+                          <geom class="g_collision" conaffinity="3" mesh="g_follower"/>
+                          <body name="g_right_pad" pos="0 -0.0189 0.01352">
+                            <inertial pos="0 -0.0025 0.0185" quat="0.707107 0 0 0.707107" mass="0.0035" diaginertia="4.73958e-07 3.64583e-07 1.23958e-07"/>
+                            <geom name="g_right_pad1" class="g_pad_box1" pos="0 -0.0026 0.028125" conaffinity="3" mass="0"/>
+                            <geom name="g_right_pad2" class="g_pad_box2" pos="0 -0.0026 0.009375" conaffinity="3" mass="0"/>
+                            <geom class="g_visual" quat="1 0 0 0" mesh="g_pad"/>
+                            <body name="g_right_silicone_pad">
+                              <geom class="g_visual" quat="1 0 0 0" material="g_black" mesh="g_silicone_pad"/>
+                            </body>
+                          </body>
+                        </body>
+                      </body>
+                      <body name="g_left_driver" pos="0 -0.0306011 0.054904" quat="0 0 0 1">
+                        <inertial pos="0 0.0177547 0.00107314" quat="0.681301 0.732003 0 0" mass="0.00899563" diaginertia="1.72352e-06 1.60906e-06 3.22006e-07"/>
+                        <joint name="g_left_driver_joint" class="g_driver"/>
+                        <geom class="g_visual" quat="1 0 0 0" material="g_gray" mesh="g_driver"/>
+                        <geom class="g_collision" quat="1 0 0 0" conaffinity="3" mesh="g_driver"/>
+                        <body name="g_left_coupler" pos="0 0.0315 -0.0041">
+                          <inertial pos="0 0.00301209 0.0232175" quat="0.705636 -0.0455904 0.0455904 0.705636" mass="0.0140974" diaginertia="4.16206e-06 3.52216e-06 8.88131e-07"/>
+                          <joint name="g_left_coupler_joint" class="g_coupler"/>
+                          <geom class="g_visual" quat="1 0 0 0" material="g_black" mesh="g_coupler"/>
+                          <geom class="g_collision" quat="1 0 0 0" conaffinity="3" mesh="g_coupler"/>
+                        </body>
+                      </body>
+                      <body name="g_left_spring_link" pos="0 -0.0132 0.0609" quat="0 0 0 1">
+                        <inertial pos="-8.65005e-09 0.0181624 0.0212658" quat="0.663403 -0.244737 0.244737 0.663403" mass="0.0221642" diaginertia="8.96853e-06 6.71733e-06 2.63931e-06"/>
+                        <joint name="g_left_spring_link_joint" class="g_spring_link"/>
+                        <geom class="g_visual" quat="1 0 0 0" material="g_black" mesh="g_spring_link"/>
+                        <geom class="g_collision" quat="1 0 0 0" conaffinity="3" mesh="g_spring_link"/>
+                        <body name="g_left_follower" pos="0 0.055 0.0375">
+                          <inertial pos="0 -0.011046 0.0124786" quat="0.986437 0.164143 0 0" mass="0.0125222" diaginertia="2.67415e-06 2.4559e-06 6.02031e-07"/>
+                          <joint name="g_left_follower_joint" class="g_follower"/>
+                          <geom class="g_visual" material="g_black" mesh="g_follower"/>
+                          <geom class="g_collision" conaffinity="3" mesh="g_follower"/>
+                          <body name="g_left_pad" pos="0 -0.0189 0.01352">
+                            <inertial pos="0 -0.0025 0.0185" quat="0.707107 0 0 0.707107" mass="0.0035" diaginertia="4.73958e-07 3.64583e-07 1.23958e-07"/>
+                            <geom name="g_left_pad1" class="g_pad_box1" pos="0 -0.0026 0.028125" conaffinity="3" mass="0"/>
+                            <geom name="g_left_pad2" class="g_pad_box2" pos="0 -0.0026 0.009375" conaffinity="3" mass="0"/>
+                            <geom class="g_visual" quat="1 0 0 0" mesh="g_pad"/>
+                            <body name="g_left_silicone_pad">
+                              <geom class="g_visual" quat="1 0 0 0" material="g_black" mesh="g_silicone_pad"/>
+                            </body>
+                          </body>
+                        </body>
+                      </body>
+                    </body>
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+
+  <contact>
+    <exclude body1="g_base" body2="g_left_driver"/>
+    <exclude body1="g_base" body2="g_right_driver"/>
+    <exclude body1="g_base" body2="g_left_spring_link"/>
+    <exclude body1="g_base" body2="g_right_spring_link"/>
+    <exclude body1="g_right_coupler" body2="g_right_follower"/>
+    <exclude body1="g_left_coupler" body2="g_left_follower"/>
+    <exclude body1="ur_mount" body2="shoulder_link"/>
+    <exclude body1="table" body2="ur_mount"/>
+    <exclude body1="table" body2="shoulder_link"/>
+    <exclude body1="printer" body2="ur_mount"/>
+    <exclude body1="wrist_3_link" body2="g_base"/>
+    <exclude body1="wrist_2_link" body2="g_base_mount"/>
+    <exclude body1="wrist_2_link" body2="wrist_cam_mount"/>
+    <exclude body1="wrist_cam_mount" body2="g_base_mount"/>
+    <exclude body1="wrist_cam_mount" body2="g_base"/>
+    <exclude body1="wrist_cam_body" body2="g_base_mount"/>
+    <exclude body1="wrist_cam_body" body2="g_base"/>
+    <exclude body1="wrist_3_link" body2="wrist_cam_body"/>
+    <exclude body1="wrist_1_link" body2="wrist_3_link"/>
+  </contact>
+
+  <tendon>
+    <fixed name="g_split">
+      <joint joint="g_right_driver_joint" coef="0.5"/>
+      <joint joint="g_left_driver_joint" coef="0.5"/>
+    </fixed>
+  </tendon>
+
+  <equality>
+    <connect body1="g_right_follower" body2="g_right_coupler" anchor="0 0 0" solref="0.005" solimp="0.95 0.99"/>
+    <connect body1="g_left_follower" body2="g_left_coupler" anchor="0 0 0" solref="0.005" solimp="0.95 0.99"/>
+    <joint joint1="g_right_driver_joint" joint2="g_left_driver_joint" solref="0.005" solimp="0.95 0.99"/>
+  </equality>
+
+  <actuator>
+    <general name="act_shoulder_pan" joint="shoulder_pan" ctrlrange="-6.28319 6.28319" ctrllimited="true" biastype="affine" gainprm="2000" biasprm="0 -2000 -50"/>
+    <general name="act_shoulder_lift" joint="shoulder_lift" ctrlrange="-6.28319 6.28319" ctrllimited="true" biastype="affine" gainprm="2000" biasprm="0 -2000 -50"/>
+    <general name="act_elbow" joint="elbow" ctrlrange="-3.14159 3.14159" ctrllimited="true" biastype="affine" gainprm="2000" biasprm="0 -2000 -50"/>
+    <general name="act_wrist_1" joint="wrist_1" ctrlrange="-6.28319 6.28319" ctrllimited="true" biastype="affine" gainprm="500" biasprm="0 -500 -50"/>
+    <general name="act_wrist_2" joint="wrist_2" ctrlrange="-6.28319 6.28319" ctrllimited="true" biastype="affine" gainprm="500" biasprm="0 -500 -50"/>
+    <general name="act_wrist_3" joint="wrist_3" ctrlrange="-6.28319 6.28319" ctrllimited="true" biastype="affine" gainprm="500" biasprm="0 -500 -50"/>
+    <general name="g_fingers_actuator" class="g_2f85" tendon="g_split" ctrlrange="0 255" forcerange="-5 5" gainprm="0.313725" biasprm="0 -100 -10"/>
+  </actuator>
+
+  <keyframe>
+    <key name="layout" qpos="1.5708 -1.45351 -1.21281 1.45032 -3.02781 -1.68098 0.0402783 0.660791 7.48095e-05 0.660597 -0.63439 0.66079 7.39064e-05 0.660597 -0.63439" ctrl="-1.45351 -1.21281 1.45032 -3.02781 -1.68098 0.0402783 0"/>
+  </keyframe>
+</mujoco>

@@ -1,0 +1,4 @@
+UR5 (CB3) collision meshes from ros-industrial/universal_robot, package ur_description
+(branch melodic-devel), https://github.com/ros-industrial/universal_robot
+License: BSD (see that repository's package.xml / license headers).
+Kinematics: Universal Robots' published DH parameters for the CB3 UR5.
